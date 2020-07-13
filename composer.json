@@ -1,0 +1,9 @@
+{
+    "require": {
+        "boedah/robo-drush": "^4.2",
+        "consolidation/robo": "^1.0"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
