@@ -1,5 +1,5 @@
 # Drupal.
-web/sites/default/settings.local.php
+web
 
 # Docker.
 docker/.env

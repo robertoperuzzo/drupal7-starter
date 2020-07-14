@@ -105,12 +105,13 @@ class RoboFile extends \Robo\Tasks {
    */
   public function build() {
     $task_list = [
+      'removeExistingProject' => $this->taskDeleteDir(self::DRUPAL_ROOT_FOLDER),
       'siteBuild' => $this->initDrush()
         ->arg('project.make.yml')
         ->arg(self::DRUPAL_ROOT_FOLDER)
         ->drush('make'),
-      'databaseUpdate' => $this->initDrush()
-        ->drush('updb'),
+      // 'databaseUpdate' => $this->initDrush()
+      //   ->drush('updb'),
     ];
     $this->getBuilder()->addTaskList($task_list);
     return $this->getBuilder();
@@ -120,15 +121,20 @@ class RoboFile extends \Robo\Tasks {
    * Install drupal project.
    */
   public function install() {
-    $this->initDrush()
-      ->siteName('Drupal 7')
-      ->siteMail('sitemail@example.com')
-      ->accountMail('mail@example.com')
-      ->accountName('admin')
-      ->accountPass('admin')
-      ->disableUpdateStatusModule()
-      ->siteInstall('standard')
-      ->run();
+    $task_list = [
+      'install' => $this->initDrush()
+        ->option('site-name', 'Drupal 7', '=')
+        ->option('site-mail', 'sitemail@example.com', '=')
+        ->option('account-mail', 'admin@example.com', '=')
+        ->option('account-name', 'admin', '=')
+        ->option('account-pass', 'admin', '=')
+        ->option('db-url', 'mysql://drupal:drupal@mariadb/drupal', '=')
+        ->arg('standard')
+        ->arg('install_configure_form.update_status_module=0')
+        ->drush('site-install')
+    ];
+    $this->getBuilder()->addTaskList($task_list);
+    return $this->getBuilder();
   }
 
   /**
