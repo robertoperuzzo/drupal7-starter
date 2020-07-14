@@ -106,7 +106,8 @@ class RoboFile extends \Robo\Tasks {
   public function build() {
     $task_list = [
       'siteBuild' => $this->initDrush()
-        ->option('root', 'project.make.yml')
+        ->arg('project.make.yml')
+        ->arg(self::DRUPAL_ROOT_FOLDER)
         ->drush('make'),
       'databaseUpdate' => $this->initDrush()
         ->drush('updb'),
