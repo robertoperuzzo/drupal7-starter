@@ -8,6 +8,7 @@ services:
   php:
     volumes:
       - $PROJECT_ROOT:/var/www/html
+      - /myworkspace/drupal-contrib/modules/drupal7:/var/www/html/modules
 
   nginx:
     volumes:

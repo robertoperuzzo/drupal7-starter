@@ -9,6 +9,7 @@ services:
     volumes:
 # For macOS users (https://wodby.com/docs/stacks/drupal/local#docker-for-mac)
       - $PROJECT_ROOT:/var/www/html:cached # User-guided caching
+      - /myworkspace/drupal-contrib/modules/drupal7:/var/www/html/modules:delegated
 
   nginx:
     volumes:

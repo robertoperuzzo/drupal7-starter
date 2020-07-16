@@ -104,14 +104,16 @@ class RoboFile extends \Robo\Tasks {
    * Build drupal project.
    */
   public function build() {
+    $modulePathTo = '/var/www/html/modules';
+    $modulePathFrom = self::DRUPAL_ROOT_FOLDER . '/sites/all/modules/contrib';
     $task_list = [
       'removeExistingProject' => $this->taskDeleteDir(self::DRUPAL_ROOT_FOLDER),
       'siteBuild' => $this->initDrush()
         ->arg('project.make.yml')
         ->arg(self::DRUPAL_ROOT_FOLDER)
         ->drush('make'),
-      // 'databaseUpdate' => $this->initDrush()
-      //   ->drush('updb'),
+      'createSymbLink' => $this->taskFilesystemStack()
+        ->symlink($modulePathTo, $modulePathFrom)
     ];
     $this->getBuilder()->addTaskList($task_list);
     return $this->getBuilder();
