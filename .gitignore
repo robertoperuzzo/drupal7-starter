@@ -9,3 +9,6 @@ docker/mariadb-init/*
 # Database dumps.
 *.sql
 *.sql.gz
+
+# Modules
+modules
