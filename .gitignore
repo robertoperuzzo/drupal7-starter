@@ -12,3 +12,6 @@ docker/mariadb-init/*
 
 # Modules
 modules
+
+# JetBrain
+.idea
